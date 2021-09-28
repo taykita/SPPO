@@ -1,4 +1,4 @@
-package main.hash;
+package task1.hash;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package main.hash;
+package task1.hash;
 
 public class SimpleRehash implements Rehash{
     public SimpleRehash(int n, int length) {

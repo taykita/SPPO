@@ -1,11 +1,11 @@
-package main;
+package task1;
 
-import main.hash.Hash;
-import main.hash.PolyHash;
-import main.hash.RandomRehash;
-import main.hash.SimpleRehash;
-import main.table.SimpleVarTable;
-import main.table.VarTable;
+import task1.hash.Hash;
+import task1.hash.PolyHash;
+import task1.hash.RandomRehash;
+import task1.hash.SimpleRehash;
+import task1.table.SimpleVarTable;
+import task1.table.VarTable;
 
 import java.io.BufferedReader;
 import java.io.File;

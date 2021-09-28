@@ -1,4 +1,4 @@
-package main.table;
+package task1.table;
 
 public interface VarTable {
     void addVar(String name, Object info);

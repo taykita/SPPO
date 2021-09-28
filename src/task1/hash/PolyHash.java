@@ -1,4 +1,4 @@
-package main.hash;
+package task1.hash;
 
 public class PolyHash implements Hash {
     public PolyHash(int length) {

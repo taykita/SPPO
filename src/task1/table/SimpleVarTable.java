@@ -1,7 +1,7 @@
-package main.table;
+package task1.table;
 
-import main.hash.Hash;
-import main.hash.Rehash;
+import task1.hash.Hash;
+import task1.hash.Rehash;
 
 import java.util.ArrayList;
 import java.util.List;
