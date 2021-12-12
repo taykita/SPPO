@@ -11,6 +11,6 @@ public class SimpleRehash implements Rehash{
 
     @Override
     public int rehash(int hash) {
-        return hash = (hash + n) % length;
+        return (hash + n) % length;
     }
 }

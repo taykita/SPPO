@@ -29,7 +29,6 @@ public class RandomRehash implements Rehash {
 
     @Override
     public int rehash(int hash) {
-//        return hash = (hash + randomArr.get(hash)) % LENGTH;
         return randomArr.get(hash);
     }
 }

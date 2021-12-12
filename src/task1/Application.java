@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Application {
 
-    public static final int FIRST_TEST = 100;
+    public static final int FIRST_TEST = 180;
     public static final int LENGTH = 200;
     public static final int SIMPLE_REHASH_N = 3;
 
@@ -46,8 +46,6 @@ public class Application {
                 varRandomRehashTable.getVar(name);
                 randomHashKF += varRandomRehashTable.getCount();
             }
-//            simpleHashKF /= names.size();
-//            randomHashKF /= names.size();
 
             System.out.println(simpleHashKF);
             System.out.println(randomHashKF);

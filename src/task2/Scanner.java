@@ -8,24 +8,25 @@ public class Scanner {
 
     private final Text text;
     private char ch;
+    private int oldPos;
 
     public Lex scan() throws Exception {
         while (ch == ' ') {
             ch = text.nextCh();
         }
-
-        if (Character.isJavaIdentifierStart(ch)) {
+        oldPos = text.getPos();
+        if (isDigit(ch)) {
+            ch = text.nextCh();
+            while (isDigit(ch)) {
+                ch = text.nextCh();
+            }
+            return Lex.NUMBER;
+        } else if (Character.isJavaIdentifierStart(ch)) {
             ch = text.nextCh();
             while (Character.isJavaIdentifierStart(ch) || Character.isDigit(ch)) {
                 ch = text.nextCh();
             }
             return Lex.NAME;
-        } else if (Character.isDigit(ch)) {
-            ch = text.nextCh();
-            while (Character.isDigit(ch)) {
-                ch = text.nextCh();
-            }
-            return Lex.NUMBER;
         } else if (ch == '(') {
             ch = text.nextCh();
             return Lex.R_PAR;
@@ -61,5 +62,17 @@ public class Scanner {
             }
         }
 
+    }
+
+    private boolean isDigit(char ch) {
+        if (ch == 'I') {
+            return true;
+        } else if (ch == 'V') {
+            return true;
+        } else return ch == 'X';
+    }
+
+    public int getPos() {
+        return oldPos;
     }
 }

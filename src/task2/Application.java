@@ -59,6 +59,7 @@ public class Application {
                 data.setCount(1);
                 data.setName(lex.name());
             }
+            System.out.println(lex.name() + " - " + scanner.getPos());
             lexMap.put(lex, data);
             lexCount++;
             lex = scanner.scan();

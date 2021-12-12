@@ -20,4 +20,9 @@ public class Text {
             return chEOT;
         }
     }
+
+    public int getPos() {
+        return pos;
+    }
+
 }
