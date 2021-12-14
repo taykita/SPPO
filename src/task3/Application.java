@@ -28,13 +28,16 @@ class LexData {
 }
 
 class LexDataObject {
-    public LexDataObject(Lex lex, int data) {
+    public LexDataObject(Lex lex, int data, boolean check) {
         this.data = data;
         this.lex = lex;
+        this.check = check;
     }
 
     private Lex lex;
     private int data;
+    private String name;
+    private boolean check;
 
     public Lex getLex() {
         return lex;
@@ -50,6 +53,35 @@ class LexDataObject {
 
     public void setData(int data) {
         this.data = data;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LexDataObject that = (LexDataObject) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
 
@@ -79,6 +111,7 @@ public class Application {
         while (lex != Lex.EOT) {
             LinkedList<LexDataObject> lexList = new LinkedList<>();
             while (lex != Lex.SEMI) {
+                boolean check = false;
                 String value = scanner.getTmpValue();
                 int intValue = 0;
                 if (Lex.NUMBER == lex) {
@@ -92,12 +125,34 @@ public class Application {
                             intValue += 1;
                         }
                     }
+                    lexList.add(new LexDataObject(lex, intValue, check));
                 } else if (lex == Lex.NAME) {
-                    System.out.println("Введите значение - " + value);
-                    intValue = read.nextInt();
+                    LexDataObject lexDataObject = new LexDataObject(lex, 0, false);
+                    lexDataObject.setName(value);
+                    if (lexList.contains(value)) {
+                        lex = scanner.scan();
+                        continue;
+                    }
+                    lex = scanner.scan();
+                    lex = scanner.scan();
+                    value = scanner.getTmpValue();
+                    int k = 1;
+                    for (int i = 0; i < value.length(); i++) {
+                        if (value.charAt(i) == 'X') {
+                            intValue += 10;
+                        } else if (value.charAt(i) == 'V') {
+                            intValue += 5;
+                        } else if (value.charAt(i) == 'I') {
+                            intValue += 1;
+                        }
+                    }
+                    lexDataObject.setData(intValue);
+                    lexDataObject.setCheck(true);
+                    lexList.add(lexDataObject);
+                } else {
+                    lexList.add(new LexDataObject(lex, intValue, check));
                 }
 
-                lexList.add(new LexDataObject(lex, intValue));
 
                 lex = scanner.scan();
             }
