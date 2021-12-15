@@ -72,10 +72,40 @@ public class Application {
         Scanner scanner = new Scanner(text);
         Lex lex = scanner.scan();
 
-        Map<Lex, LexData> lexMap = new HashMap<>();
+        Map<String, Integer> lexMap = new HashMap<>();
 
-        System.out.println(lex.name());
         int lexCount = 0;
+
+
+
+        if (lex == Lex.R_PAR) {
+            lex = scanner.scan();
+            while (lex != Lex.L_PAR) {
+                String name = scanner.getTmpValue();
+                scanner.scan();
+                scanner.scan();
+                String number = scanner.getTmpValue();
+                int intNumber = 0;
+                int k = 1;
+                for (int i = 0; i < number.length(); i++) {
+                    if (number.charAt(i) == 'X') {
+                        intNumber += 10;
+                    } else if (number.charAt(i) == 'V') {
+                        intNumber += 5;
+                    } else if (number.charAt(i) == 'I') {
+                        intNumber += 1;
+                    }
+                }
+                lexMap.put(name, intNumber);
+                lex = scanner.scan();
+                if (lex == Lex.L_PAR) {
+                    break;
+                }
+                lex = scanner.scan();
+            }
+            lex = scanner.scan();
+        }
+//(f := 10; t := 5) f + t;
         while (lex != Lex.EOT) {
             LinkedList<LexDataObject> lexList = new LinkedList<>();
             while (lex != Lex.SEMI) {
@@ -93,8 +123,7 @@ public class Application {
                         }
                     }
                 } else if (lex == Lex.NAME) {
-                    System.out.println("Введите значение - " + value);
-                    intValue = read.nextInt();
+                    intValue = lexMap.get(value);
                 }
 
                 lexList.add(new LexDataObject(lex, intValue));

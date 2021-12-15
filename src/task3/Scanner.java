@@ -58,6 +58,7 @@ public class Scanner {
         } else if (ch == ':'){
             ch = text.nextCh();
             if (ch == '=') {
+                ch = text.nextCh();
                 return Lex.ASSIGN;
             }
             throw new Exception("Лексическая ошибка! Лексема ':' не существует!");
